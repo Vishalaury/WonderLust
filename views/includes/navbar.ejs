@@ -1,0 +1,124 @@
+<style>
+  /* === Navbar Styling === */
+  .navbar {
+    background: #f8f9fa !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .navbar-brand,
+  .nav-link {
+    color: #333 !important;
+  }
+
+  .nav-link:hover {
+    color: #fe424d !important;
+  }
+
+  /* === Search Bar === */
+  .search-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    min-width: 250px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+  }
+
+  .search-btn:hover {
+    background-color: #e63946;
+    color: #fff;
+  }
+
+  .logout-btn {
+    background: none;
+    border: none;
+    color: #fe424d;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logout-btn:hover {
+    color: #e04848;
+  }
+
+  @media (max-width: 768px) {
+    .search-container {
+      position: static;
+      transform: none;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-md sticky-top border-bottom position-relative">
+  <div class="container-fluid">
+
+    <!-- Left: Logo + Explore -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand fw-bold d-flex align-items-center me-3" href="/listings">
+        <i class="fa-regular fa-compass me-1 text-danger"></i> ApexHaven
+      </a>
+      <a class="nav-link fw-medium" href="/listings">Explore</a>
+    </div>
+
+    <!-- Hamburger (for mobile) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Center: Search Bar -->
+    <div class="search-container d-none d-md-flex">
+      <input class="form-control search-inp" type="search" placeholder="Search destinations" />
+      <button class="btn search-btn" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i> Search
+      </button>
+    </div>
+
+    <!-- Right: Airbnb your home + Auth -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav d-flex align-items-center gap-3">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+
+        <% if (!currUser) { %>
+          <a class="nav-link fw-semibold" href="/signup">Sign up</a>
+          <a class="nav-link fw-semibold" href="/login">Log in</a>
+        <% } else { %>
+          <form action="/logout" method="POST" class="m-0">
+            <button class="logout-btn" type="submit">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+            </button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+
+  </div>
+</nav>
